@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReWear – Swapping</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional swapping page styles can go here if needed */
+  </style>
+</head>
+<body>
+  <!-- Header (reuse from home) -->
+  <header class="header">
+    <div class="container">
+      <div class="logo" style="font-size:2rem;font-weight:bold;color:#7a6c5d;letter-spacing:2px;">ReWear <span style="font-size:1rem;font-weight:400;margin-left:8px;">– Community Clothing Exchange</span></div>
+      <nav class="main-nav">
+        <a href="home.html" class="nav-link">Home</a>
+        <a href="swapping.html" class="nav-link active">Swapping</a>
+        <a href="#" class="nav-link">Browse</a>
+        <a href="#" class="nav-link">Login</a>
+        <a href="#" class="nav-link">Sign Up</a>
+        <a href="#contact" class="nav-link">About Us</a>
+      </nav>
+      <div class="nav-group">
+        <span class="user-points" style="margin-right:14px;font-size:1.08rem;color:#bfa58a;font-weight:600;display:flex;align-items:center;gap:4px;">
+          <span style="font-size:1.2em;">&#11088;</span> <span id="userPoints">0</span> pts
+        </span>
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search for clothing items...">
+        <button id="searchBtn" class="search-btn"><span>&#128269;</span></button>
+        <img src="images/default.png" alt="User Profile" class="profile-avatar" />
+      </div>
+    </div>
+  </header>
+
+  <!-- Notification Area -->
+  <div id="notificationArea" class="notification-area"></div>
+
+  <!-- Filter Bar -->
+  <section class="filter-bar main-container">
+    <select id="filterCategory">
+      <option value="">Category</option>
+      <option>Men</option>
+      <option>Women</option>
+      <option>Kids</option>
+    </select>
+    <select id="filterType">
+      <option value="">Type</option>
+      <option>Top</option>
+      <option>Bottom</option>
+      <option>Dress</option>
+      <option>Outerwear</option>
+      <option>Accessories</option>
+    </select>
+    <select id="filterSize">
+      <option value="">Size</option>
+      <option>S</option>
+      <option>M</option>
+      <option>L</option>
+      <option>XL</option>
+    </select>
+    <select id="filterCondition">
+      <option value="">Condition</option>
+      <option>New</option>
+      <option>Like New</option>
+      <option>Good</option>
+      <option>Fair</option>
+    </select>
+    <input type="text" id="filterTags" placeholder="Tags" />
+    <select id="filterSort">
+      <option value="recent">Most Recent</option>
+      <option value="popular">Most Popular</option>
+      <option value="match">Closest Match</option>
+    </select>
+    <button id="filterBtn" class="cta-btn hero-btn-main">Filter</button>
+  </section>
+
+  <!-- Swap Items Grid -->
+  <section class="product-listings main-container">
+    <h2 class="section-title">Available for Swap</h2>
+    <div class="products-grid" id="swapItemsGrid">
+      <!-- JS will populate item cards here -->
+    </div>
+  </section>
+
+  <!-- Offer Swap Modal -->
+  <div id="offerSwapModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close-modal" id="closeOfferModal">&times;</span>
+      <h3>Offer a Swap</h3>
+      <label for="myItemsSelect">Choose one of your items:</label>
+      <select id="myItemsSelect"></select>
+      <label for="swapMessage">Message (optional):</label>
+      <textarea id="swapMessage" placeholder="Add a message..."></textarea>
+      <button id="confirmOfferBtn" class="cta-btn hero-btn-main">Send Swap Request</button>
+    </div>
+  </div>
+
+  <!-- My Swaps Section -->
+  <section class="my-swaps main-container">
+    <h2 class="section-title">My Swaps</h2>
+    <div class="swap-tabs">
+      <button class="swap-tab active" data-tab="sent">Sent</button>
+      <button class="swap-tab" data-tab="received">Received</button>
+      <button class="swap-tab" data-tab="completed">Completed</button>
+      <button class="swap-tab" data-tab="cancelled">Cancelled</button>
+    </div>
+    <div id="swapTabContent">
+      <!-- JS will populate swap cards here -->
+    </div>
+  </section>
+
+  <!-- Chat Modal -->
+  <div id="chatModal" class="modal" style="display:none;">
+    <div class="modal-content chat-modal-content">
+      <span class="close-modal" id="closeChatModal">&times;</span>
+      <h3>Swap Chat</h3>
+      <div id="chatMessages" class="chat-messages"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Type a message..." />
+        <button id="sendChatBtn" class="cta-btn hero-btn-main">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/swapping.js"></script>
+</body>
+</html> 
