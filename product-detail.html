@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReWear - Product Detail</title>
+    <!-- Add Booksaw's CSS dependencies -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="booksaw-1.0.0/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="booksaw-1.0.0/icomoon/icomoon.css">
+    <link rel="stylesheet" type="text/css" href="booksaw-1.0.0/css/vendor.css">
+    
+    <!-- Enhanced Embedded Styles -->
+    <style>
+        :root {
+            --accent-color: #C5A992;
+            --secondary-color: #C5A992;
+            --dark-color: #2f2f2f;
+            --light-color: #F3F2EC;
+            --body-text-color: #757575;
+            --light-text-color: #afafaf;
+            --dark-text-color: #2f2f2f;
+            --bs-primary: #C5A992;
+            --bs-primary-dark: #C5A992;
+            --bs-secondary: #C5A992;
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: "Raleway", arial, sans-serif;
+            background: var(--light-color);
+            min-height: 100vh;
+            color: var(--dark-text-color);
+            line-height: 1.6;
+        }
+
+        /* Enhanced Navigation */
+        .navbar {
+            background: #f3f2ec;
+            padding: 20px 0;
+            border-bottom: 1px solid #E0E0E0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .logo:hover {
+            color: var(--dark-color);
+        }
+
+        .user-profile {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 2px 10px rgba(197, 169, 146, 0.3);
+        }
+
+        .user-profile:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(197, 169, 146, 0.4);
+        }
+
+        /* Enhanced Search Bar */
+        .search-container {
+            background: var(--light-color);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.2rem 3.5rem 1.2rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: all var(--transition-speed) ease;
+            background: white;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(197, 169, 146, 0.2);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent-color);
+            border: none;
+            padding: 0.9rem;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            background: var(--dark-color);
+        }
+
+        /* Enhanced Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 2rem;
+        }
+
+        /* Enhanced Product Detail Section */
+        .product-detail {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .product-detail:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Enhanced Image Gallery */
+        .image-gallery {
+            background: #EFEEE8;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .main-image {
+            width: 100%;
+            height: 450px;
+            background: white;
+            border: 1px solid #EAE8DF;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .main-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .image-thumbnails {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .thumbnail {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border: 2px solid #EAE8DF;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            overflow: hidden;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail:hover, .thumbnail.active {
+            transform: scale(1.1);
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(197, 169, 146, 0.3);
+        }
+
+        /* Enhanced Product Description */
+        .product-description {
+            background: #EFEEE8;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-title {
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: var(--dark-text-color);
+            margin-bottom: 0.8rem;
+            font-family: "Prata", Georgia, serif;
+            line-height: 1.2;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .points-badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            display: inline-block;
+            box-shadow: 0 2px 10px rgba(197, 169, 146, 0.3);
+        }
+
+        .availability-badge {
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            background: #e8f5e8;
+            color: #2d5a2d;
+            display: inline-block;
+            box-shadow: 0 2px 10px rgba(45, 90, 45, 0.1);
+        }
+
+        /* Enhanced Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .btn-outline-accent {
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all var(--transition-speed) ease;
+            background: transparent;
+        }
+
+        .btn-outline-accent:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(197, 169, 146, 0.3);
+        }
+
+        /* Enhanced Previous Listings Section */
+        .previous-listings {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--dark-text-color);
+            font-family: "Prata", Georgia, serif;
+            margin-bottom: 0;
+        }
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .listing-card {
+            background: white;
+            border: 1px solid #EAE8DF;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .listing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .listing-image {
+            width: 100%;
+            height: 200px;
+            background: #EFEEE8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .listing-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .listing-card:hover .listing-image img {
+            transform: scale(1.1);
+        }
+
+        .listing-info {
+            padding: 1.5rem;
+        }
+
+        .listing-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--dark-text-color);
+            margin-bottom: 0.8rem;
+            font-family: "Prata", Georgia, serif;
+        }
+
+        .listing-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .price-value {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .listing-date {
+            color: var(--body-text-color);
+            font-size: 0.9rem;
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 992px) {
+            .product-content {
+                grid-template-columns: 1fr;
+            }
+
+            .main-image {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .search-container {
+                padding: 1rem;
+            }
+
+            .main-container {
+                padding: 1rem;
+            }
+
+            .product-detail,
+            .previous-listings {
+                padding: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .main-image {
+                height: 350px;
+            }
+
+            .product-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .main-image {
+                height: 300px;
+            }
+
+            .product-price {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
+    <!-- Navigation -->
+    <nav class="navbar" id="header">
+        <div class="container-fluid">
+            <a href="#" class="logo main-logo">ReWear</a>
+            <div class="user-profile" onclick="toggleUserMenu()">
+                <i class="icon icon-user"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Search for items, brands, categories..." id="searchInput">
+            <button class="search-btn" onclick="performSearch()">
+                <i class="icon icon-search"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container container">
+        <!-- Product Detail Section -->
+        <div class="product-detail">
+            <div class="product-content">
+                <!-- Image Gallery -->
+                <div class="image-gallery">
+                    <div class="main-image" id="mainImage">
+                        <img src="" alt="Product Image" id="mainProductImage">
+                    </div>
+                    <div class="image-thumbnails" id="imageThumbnails">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                    <button class="btn btn-outline-accent upload-btn" onclick="uploadImage()">
+                        <i class="icon icon-upload"></i> Add Images
+                    </button>
+                </div>
+
+                <!-- Product Description section -->
+                <div class="product-description">
+                    <div class="description-header">
+                        <div>
+                            <h1 class="product-title">Denim Jacket</h1>
+                            <p class="product-price">
+                                <span class="price-value">$40.00</span>
+                                <span class="points-badge">50 Points</span>
+                            </p>
+                        </div>
+                        <div class="availability-badge">
+                            ✅ Available/Swap
+                        </div>
+                    </div>
+
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <span class="detail-label">ID</span>
+                            <span class="detail-value">6</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Listed by</span>
+                            <span class="detail-value">User ID: 1</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Listed on</span>
+                            <span class="detail-value">July 12, 2025</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Points Required</span>
+                            <span class="detail-value">50 Points</span>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-outline-accent" onclick="requestSwap()">
+                            🔄 Request Swap
+                        </button>
+                        <button class="btn btn-outline-accent" onclick="redeemWithPoints()">
+                            🏆 Redeem via Points
+                        </button>
+                        <button class="btn btn-outline-accent" onclick="contactSeller()">
+                            💬 Contact Seller
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Previous Listings Section -->
+        <div class="previous-listings">
+            <div class="section-header">
+                <h3 class="section-title">Previous Listings</h3>
+                <a href="#" class="btn btn-outline-accent btn-accent-arrow">View All</a>
+            </div>
+            <div class="listings-grid" id="previousListings">
+                <!-- Items will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Booksaw's JS dependencies -->
+    <script src="booksaw-1.0.0/js/jquery-1.11.0.min.js"></script>
+    <script src="booksaw-1.0.0/js/plugins.js"></script>
+    <script src="booksaw-1.0.0/js/script.js"></script>
+
+    <!-- Embedded JavaScript -->
+    <script>
+        // Sample data for previous listings matching database schema
+        const previousListings = [
+            {
+                id: 6,
+                user_id: 1,
+                title: 'Denim Jacket',
+                price: 40.00,
+                points: 50,
+                image: 'jack.jpg',
+                created_at: '2025-07-12 11:33:12'
+            },
+            {
+                id: 7,
+                user_id: 2,
+                title: 'Leather Boots',
+                price: 38.00,
+                points: 45,
+                image: 'boots.jpg',
+                created_at: '2025-07-12 11:33:12'
+            },
+            {
+                id: 8,
+                user_id: 3,
+                title: 'Silk Saree',
+                price: 45.00,
+                points: 55,
+                image: 'sari.jpg',
+                created_at: '2025-07-12 11:33:12'
+            },
+            {
+                id: 9,
+                user_id: 1,
+                title: 'Vintage Shirt',
+                price: 35.00,
+                points: 40,
+                image: 'shirt.jpg',
+                created_at: '2025-07-12 11:33:12'
+            },
+            {
+                id: 10,
+                user_id: 2,
+                title: 'Cotton Kurti',
+                price: 40.00,
+                points: 50,
+                image: 'kurti.jpg',
+                created_at: '2025-07-12 11:33:12'
+            }
+        ];
+
+        // Function to create listing card
+        function createListingCard(item) {
+            return `
+                <div class="listing-card product-style" onclick="viewListing(${item.id})">
+                    <div class="listing-image">
+                        <img src="${item.image}" alt="${item.title}" onerror="this.onerror=null; this.src='default-product.jpg';">
+                    </div>
+                    <div class="listing-info">
+                        <div class="listing-title">${item.title}</div>
+                        <div class="listing-price">
+                            <div class="price-value">$${item.price.toFixed(2)}</div>
+                            <div class="points-badge">${item.points} Points</div>
+                        </div>
+                        <div class="listing-date">${new Date(item.created_at).toLocaleDateString()}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to change main image
+        function changeImage(imagePath) {
+            const mainImage = document.getElementById('mainProductImage');
+            mainImage.src = imagePath;
+            
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+                if (thumb.querySelector('img').src === imagePath) {
+                    thumb.classList.add('active');
+                }
+            });
+        }
+
+        // Function to populate previous listings
+        function populatePreviousListings() {
+            const container = document.getElementById('previousListings');
+            container.innerHTML = previousListings.map(createListingCard).join('');
+        }
+
+        // Function to handle search
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            console.log('Searching for:', searchInput.value);
+            // Implement search functionality
+        }
+
+        // Function to toggle user menu
+        function toggleUserMenu() {
+            console.log('User menu toggled');
+            // Implement user menu toggle
+        }
+
+        // Function to handle image upload
+        function uploadImage() {
+            console.log('Upload image clicked');
+            // Implement image upload functionality
+        }
+
+        // Function to handle swap request
+        function requestSwap() {
+            console.log('Swap requested');
+            // Implement swap request functionality
+        }
+
+        // Function to handle points redemption
+        function redeemWithPoints() {
+            console.log('Points redemption requested');
+            // Implement points redemption functionality
+        }
+
+        // Function to handle seller contact
+        function contactSeller() {
+            console.log('Contact seller clicked');
+            // Implement seller contact functionality
+        }
+
+        // Function to view listing details
+        function viewListing(itemId) {
+            console.log('Viewing listing:', itemId);
+            // Implement listing view functionality
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            populatePreviousListings();
+
+            // Initialize AOS if available
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 1200,
+                    once: true,
+                });
+            }
+        });
+    </script>
+</body>
+</html>
