@@ -30,6 +30,8 @@ Moderate and approve/reject item listings
 Remove inappropriate or spam items 
 Lightweight admin panel for oversight
 
+Video Link-https://drive.google.com/drive/folders/16_VcDhV2P_XlxmcK-du0cyUJL-4HU9UL?usp=sharing
+
 Team Members:
 Saumya Chandwani-23dcs014@charusat.edu.in
 Khushi Dadhaniya-23dcs017@charusat.edu.in
