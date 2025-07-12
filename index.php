@@ -19,8 +19,16 @@
 	<link href="icomoon/icomoon.css" rel="stylesheet" type="text/css" />
 	<link href="css/vendor.css" rel="stylesheet" type="text/css" />
 	<link href="style.css" rel="stylesheet" type="text/css" />
-</head>
-
+</head><style
+		type="text/css">
+		.uniform-image {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+</style>
 <body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
 	<div id="header-wrap">
 		<div class="top-content">
@@ -129,7 +137,6 @@
 	</section>
 <!--header-wrap-->
 
-	
 	<section class="py-5 my-5" id="featured-books">
     <div class="container">
         <div class="section-header align-center mb-4">
@@ -138,84 +145,56 @@
         </div>
 
         <div class="row g-4">
-            <!-- User 1 -->
-            <div class="col-12">
-                <div class="d-flex align-items-center justify-content-between p-4 mb-4 shadow-sm rounded bg-white">
-                    <div class="d-flex align-items-center">
-                        <img src="images/user1.png" alt="User" class="rounded-circle me-4" width="70" height="70" style="object-fit: cover;">
-                        <div>
-                            <h5 class="mb-1 fw-bold">Alice Smith</h5>
-                            <p class="mb-0 text-muted">alice@example.com<br><small>Registered: Jan 12, 2024</small></p>
-                        </div>
-                    </div>
-                    <div class="text-end">
-                        <a href="#" class="btn btn-outline-accent d-block mb-2 px-4 py-2">EDIT</a>
-                        <a href="#" class="btn btn-outline-accent d-block px-4 py-2">DELETE</a>
-                    </div>
-                </div>
-            </div>
+            <?php
+            $result = $conn->query("SELECT * FROM users ORDER BY created_at DESC");
 
-            <!-- User 2 -->
+            if ($result->num_rows > 0):
+                while ($user = $result->fetch_assoc()):
+                    // Set image path — fallback to default if empty
+                    $imageFile = !empty($user['profile_image']) ? $user['profile_image'] : 'default-user.png';
+            ?>
             <div class="col-12">
                 <div class="d-flex align-items-center justify-content-between p-4 mb-4 shadow-sm rounded bg-white">
                     <div class="d-flex align-items-center">
-                        <img src="images/user2.png" alt="User" class="rounded-circle me-4" width="70" height="70" style="object-fit: cover;">
+                        <img src="images/<?= htmlspecialchars($imageFile) ?>"
+                             alt="User"
+                             class="rounded-circle me-4"
+                             width="70"
+                             height="70"
+                             style="object-fit: cover;">
                         <div>
-                            <h5 class="mb-1 fw-bold">Bob Johnson</h5>
-                            <p class="mb-0 text-muted">bob@example.com<br><small>Registered: Mar 2, 2024</small></p>
+                            <h5 class="mb-1 fw-bold"><?= htmlspecialchars($user['name']) ?></h5>
+                            <p class="mb-0 text-muted">
+                                <?= htmlspecialchars($user['email']) ?><br>
+                                <small>Registered: <?= date("M d, Y", strtotime($user['created_at'])) ?></small>
+                            </p>
                         </div>
                     </div>
                     <div class="text-end">
-                        <a href="#" class="btn btn-outline-accent d-block mb-2 px-4 py-2">EDIT</a>
-                        <a href="#" class="btn btn-outline-accent d-block px-4 py-2">DELETE</a>
+                        <a href="edit_user.php?id=<?= $user['id'] ?>" class="btn btn-outline-accent d-block mb-2 px-4 py-2">EDIT</a>
+                        <a href="delete_user.php?id=<?= $user['id'] ?>" class="btn btn-outline-accent d-block px-4 py-2" onclick="return confirm('Are you sure to delete this user?');">DELETE</a>
                     </div>
                 </div>
             </div>
-
-            <!-- User 3 -->
-            <div class="col-12">
-                <div class="d-flex align-items-center justify-content-between p-4 mb-4 shadow-sm rounded bg-white">
-                    <div class="d-flex align-items-center">
-                        <img src="images/user3.png" alt="User" class="rounded-circle me-4" width="70" height="70" style="object-fit: cover;">
-                        <div>
-                            <h5 class="mb-1 fw-bold">Carol Thomas</h5>
-                            <p class="mb-0 text-muted">carol@example.com<br><small>Registered: Apr 20, 2024</small></p>
-                        </div>
-                    </div>
-                    <div class="text-end">
-                        <a href="#" class="btn btn-outline-accent d-block mb-2 px-4 py-2">EDIT</a>
-                        <a href="#" class="btn btn-outline-accent d-block px-4 py-2">DELETE</a>
-                    </div>
-                </div>
+            <?php
+                endwhile;
+            else:
+            ?>
+            <div class="col-12 text-center">
+                <p class="text-muted">No users found.</p>
             </div>
-
-            <!-- User 4 -->
-            <div class="col-12">
-                <div class="d-flex align-items-center justify-content-between p-4 mb-4 shadow-sm rounded bg-white">
-                    <div class="d-flex align-items-center">
-                        <img src="images/user4.png" alt="User" class="rounded-circle me-4" width="70" height="70" style="object-fit: cover;">
-                        <div>
-                            <h5 class="mb-1 fw-bold">David Lee</h5>
-                            <p class="mb-0 text-muted">david@example.com<br><small>Registered: May 8, 2024</small></p>
-                        </div>
-                    </div>
-                    <div class="text-end">
-                        <a href="#" class="btn btn-outline-accent d-block mb-2 px-4 py-2">EDIT</a>
-                        <a href="#" class="btn btn-outline-accent d-block px-4 py-2">DELETE</a>
-                    </div>
-                </div>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
+</section>
+
 	<section class="bookshelf py-5 my-5" id="popular-books">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 
 				<div class="section-header align-center">
-					<div class="title">
-						<span>Orders</span>
-					</div>
+					<div class="title"><span>Orders</span></div>
 					<h2 class="section-title">Manage Orders</h2>
 				</div>
 
@@ -228,86 +207,50 @@
 				</ul>
 
 				<div class="tab-content">
-					<!-- All Orders -->
-					<div class="active" data-tab-content id="popular-books">
-						<div class="row g-4">
-							<div class="col-md-6">
-								<div class="product-item p-4 shadow-sm rounded bg-white">
-									<h5 class="fw-bold">Order #00123</h5>
-									<p class="text-muted mb-1">User: Alice Smith</p>
-									<p class="text-muted mb-1">Item: Denim Jacket</p>
-									<p class="text-muted mb-1">Status: <strong>Shipped</strong></p>
-									<p class="text-muted mb-3">Placed: Jan 14, 2024</p>
-									<div>
-										<a href="#" class="btn btn-outline-accent btn-sm">View</a>
-										<a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
-									</div>
-								</div>
-							</div>
+					<!-- Tab Content Loop -->
+					<?php
+					$statuses = ['All' => '', 'Pending' => 'Pending', 'Shipped' => 'Shipped', 'Delivered' => 'Delivered', 'Cancelled' => 'Cancelled'];
+					foreach ($statuses as $key => $status):
+						$tabId = strtolower($key) . '-orders';
+						$isActive = ($key === 'All') ? 'active' : '';
+						echo "<div class='$isActive' data-tab-content id='$tabId'><div class='row g-4'>";
+						
+						$sql = "SELECT orders.*, users.name FROM orders 
+								JOIN users ON orders.user_id = users.id ";
+						if ($status !== '') {
+							$sql .= "WHERE orders.status = '$status' ";
+						}
+						$sql .= "ORDER BY orders.created_at DESC";
+						$result = $conn->query($sql);
 
-							<div class="col-md-6">
-								<div class="product-item p-4 shadow-sm rounded bg-white">
-									<h5 class="fw-bold">Order #00124</h5>
-									<p class="text-muted mb-1">User: Bob Johnson</p>
-									<p class="text-muted mb-1">Item: Leather Boots</p>
-									<p class="text-muted mb-1">Status: <strong>Pending</strong></p>
-									<p class="text-muted mb-3">Placed: Jan 15, 2024</p>
-									<div>
-										<a href="#" class="btn btn-outline-accent btn-sm">View</a>
-										<a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Pending Orders -->
-					<div data-tab-content id="pending-orders">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="product-item p-4 shadow-sm rounded bg-white">
-									<h5 class="fw-bold">Order #00124</h5>
-									<p class="text-muted mb-1">User: Bob Johnson</p>
-									<p class="text-muted mb-1">Item: Leather Boots</p>
-									<p class="text-muted mb-1">Status: <strong>Pending</strong></p>
-									<p class="text-muted mb-3">Placed: Jan 15, 2024</p>
-									<div>
-										<a href="#" class="btn btn-outline-accent btn-sm">View</a>
-										<a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
-									</div>
+						if ($result->num_rows > 0):
+							while ($order = $result->fetch_assoc()):
+					?>
+						<div class="col-md-6">
+							<div class="product-item p-4 shadow-sm rounded bg-white">
+								<h5 class="fw-bold">Order #<?= str_pad($order['id'], 5, '0', STR_PAD_LEFT) ?></h5>
+								<p class="text-muted mb-1">User: <?= htmlspecialchars($order['name']) ?></p>
+								<p class="text-muted mb-1">Item: <?= htmlspecialchars($order['item_name']) ?></p>
+								<p class="text-muted mb-1">Status: <strong><?= $order['status'] ?></strong></p>
+								<p class="text-muted mb-3">Placed: <?= date('M d, Y', strtotime($order['created_at'])) ?></p>
+								<div>
+									<a href="#" class="btn btn-outline-accent btn-sm">View</a>
+									<a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
 								</div>
 							</div>
 						</div>
-					</div>
-
-					<!-- Shipped Orders -->
-					<div data-tab-content id="shipped-orders">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="product-item p-4 shadow-sm rounded bg-white">
-									<h5 class="fw-bold">Order #00123</h5>
-									<p class="text-muted mb-1">User: Alice Smith</p>
-									<p class="text-muted mb-1">Item: Denim Jacket</p>
-									<p class="text-muted mb-1">Status: <strong>Shipped</strong></p>
-									<p class="text-muted mb-3">Placed: Jan 14, 2024</p>
-									<div>
-										<a href="#" class="btn btn-outline-accent btn-sm">View</a>
-										<a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
-									</div>
-								</div>
-							</div>
+					<?php
+							endwhile;
+						else:
+					?>
+						<div class="col-md-12 text-muted">
+							<p>No <?= $status ?: 'orders' ?> found.</p>
 						</div>
-					</div>
+					<?php endif;
+						echo "</div></div>";
+					endforeach;
+					?>
 
-					<!-- Delivered Orders -->
-					<div data-tab-content id="delivered-orders">
-						<p class="text-muted">No delivered orders yet.</p>
-					</div>
-
-					<!-- Cancelled Orders -->
-					<div data-tab-content id="cancelled-orders">
-						<p class="text-muted">No cancelled orders yet.</p>
-					</div>
 				</div>
 
 			</div>
@@ -324,102 +267,49 @@
 	</div>
 </section>
 <section class="bookshelf pb-5 mb-5" id="special-offer">
-	<div class="section-header align-center">
-		<div class="title">
-			<span>Inventory Control</span>
-		</div>
-		<h2 class="section-title">Manage Listings</h2>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="inner-content">
-				<div class="product-list" data-aos="fade-up">
-					<div class="grid product-grid">
-						<!-- Listing 1 -->
-						<div class="product-item">
-							<figure class="product-style">
-								<img src="images/product-item5.jpg" alt="Product" class="product-item">
-							</figure>
-							<figcaption>
-								<h3>Denim Jacket</h3>
-								<span>Seller: Alice Smith</span>
-								<div class="item-price">$ 40.00</div>
-								<div class="mt-2">
-									<a href="#" class="btn btn-outline-accent btn-sm me-2">Edit</a>
-									<a href="#" class="btn btn-outline-secondary btn-sm">Delete</a>
-								</div>
-							</figcaption>
-						</div>
+    <div class="section-header align-center">
+        <div class="title"><span>Inventory Control</span></div>
+        <h2 class="section-title">Manage Listings</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="inner-content">
+                <div class="product-list" data-aos="fade-up">
+                    <div class="grid product-grid">
+                        <?php
+                        $query = "SELECT l.*, u.name AS seller_name 
+                                  FROM listings l
+                                  JOIN users u ON l.user_id = u.id
+                                  ORDER BY l.created_at DESC";
+                        $result = $conn->query($query);
 
-						<!-- Listing 2 -->
-						<div class="product-item">
-							<figure class="product-style">
-								<img src="images/product-item6.jpg" alt="Product" class="product-item">
-							</figure>
-							<figcaption>
-								<h3>Leather Boots</h3>
-								<span>Seller: Bob Johnson</span>
-								<div class="item-price">$ 38.00</div>
-								<div class="mt-2">
-									<a href="#" class="btn btn-outline-accent btn-sm me-2">Edit</a>
-									<a href="#" class="btn btn-outline-secondary btn-sm">Delete</a>
-								</div>
-							</figcaption>
-						</div>
-
-						<!-- Listing 3 -->
-						<div class="product-item">
-							<figure class="product-style">
-								<img src="images/product-item7.jpg" alt="Product" class="product-item">
-							</figure>
-							<figcaption>
-								<h3>Silk Saree</h3>
-								<span>Seller: Priya Patel</span>
-								<div class="item-price">$ 45.00</div>
-								<div class="mt-2">
-									<a href="#" class="btn btn-outline-accent btn-sm me-2">Edit</a>
-									<a href="#" class="btn btn-outline-secondary btn-sm">Delete</a>
-								</div>
-							</figcaption>
-						</div>
-
-						<!-- Listing 4 -->
-						<div class="product-item">
-							<figure class="product-style">
-								<img src="images/product-item8.jpg" alt="Product" class="product-item">
-							</figure>
-							<figcaption>
-								<h3>Vintage Shirt</h3>
-								<span>Seller: Rahul Mehta</span>
-								<div class="item-price">$ 35.00</div>
-								<div class="mt-2">
-									<a href="#" class="btn btn-outline-accent btn-sm me-2">Edit</a>
-									<a href="#" class="btn btn-outline-secondary btn-sm">Delete</a>
-								</div>
-							</figcaption>
-						</div>
-
-						<!-- Listing 5 -->
-						<div class="product-item">
-							<figure class="product-style">
-								<img src="images/product-item2.jpg" alt="Product" class="product-item">
-							</figure>
-							<figcaption>
-								<h3>Cotton Kurti</h3>
-								<span>Seller: Aisha Khan</span>
-								<div class="item-price">$ 40.00</div>
-								<div class="mt-2">
-									<a href="#" class="btn btn-outline-accent btn-sm me-2">Edit</a>
-									<a href="#" class="btn btn-outline-secondary btn-sm">Delete</a>
-								</div>
-							</figcaption>
-						</div>
-					</div><!--grid-->
-				</div>
-			</div><!--inner-content-->
-		</div>
-	</div>
+                        if ($result->num_rows > 0):
+                            while ($row = $result->fetch_assoc()):
+                        ?>
+                        <div class="product-item">
+                            <figure class="product-style">
+                                <img src="images/<?= htmlspecialchars($row['image']) ?>" alt="Product" class="product-item uniform-image">
+                            </figure>
+                            <figcaption>
+                                <h3><?= htmlspecialchars($row['title']) ?></h3>
+                                <span>Seller: <?= htmlspecialchars($row['seller_name']) ?></span>
+                                <div class="item-price">$ <?= number_format($row['price'], 2) ?></div>
+                                <div class="mt-2">
+                                    <a href="edit_listing.php?id=<?= $row['id'] ?>" class="btn btn-outline-accent btn-sm me-2">Edit</a>
+                                    <a href="delete_listing.php?id=<?= $row['id'] ?>" class="btn btn-outline-secondary btn-sm" onclick="return confirm('Delete this listing?');">Delete</a>
+                                </div>
+                            </figcaption>
+                        </div>
+                        <?php endwhile; else: ?>
+                            <p class="text-muted">No listings found.</p>
+                        <?php endif; ?>
+                    </div><!--grid-->
+                </div>
+            </div><!--inner-content-->
+        </div>
+    </div>
 </section>
+
 <section id="follow-instagram">
 	<div class="container">
 		<div class="row justify-content-center">
