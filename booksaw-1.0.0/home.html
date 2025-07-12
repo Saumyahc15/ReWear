@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReWear – Home</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="logo" style="font-size:2rem;font-weight:bold;color:#7a6c5d;letter-spacing:2px;">ReWear <span style="font-size:1rem;font-weight:400;margin-left:8px;">– Community Clothing Exchange</span></div>
+      <div class="nav-group">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search for clothing items...">
+        <button id="searchBtn" class="search-btn"><span>&#128269;</span></button>
+        <img src="images/default.png" alt="User Profile" class="profile-avatar" />
+      </div>
+    </div>
+  </header>
+
+  <!-- Landing Page Section -->
+  <section class="landing-section" style="max-width:900px;margin:40px auto 0 auto;text-align:center;">
+    <h1 style="font-size:2.5rem;color:#7a6c5d;font-weight:800;margin-bottom:12px;">Welcome to ReWear</h1>
+    <p style="font-size:1.2rem;color:#6d6256;margin-bottom:24px;">ReWear is a community-driven platform to exchange unused clothing through direct swaps or a point-based system. Join us to promote sustainable fashion and reduce textile waste!</p>
+    <div style="display:flex;justify-content:center;gap:18px;margin-bottom:24px;flex-wrap:wrap;">
+      <a href="#" class="cta-btn" style="background:#bfa58a;color:#fff;padding:14px 32px;border-radius:8px;font-size:1.1rem;font-weight:600;text-decoration:none;transition:background 0.2s;">Start Swapping</a>
+      <a href="#" class="cta-btn" style="background:#7a6c5d;color:#fff;padding:14px 32px;border-radius:8px;font-size:1.1rem;font-weight:600;text-decoration:none;transition:background 0.2s;">Browse Items</a>
+      <a href="#" class="cta-btn" style="background:#fff;color:#bfa58a;padding:14px 32px;border-radius:8px;font-size:1.1rem;font-weight:600;text-decoration:none;border:2px solid #bfa58a;transition:background 0.2s;">List an Item</a>
+    </div>
+  </section>
+
+  <!-- Featured Items Carousel -->
+  <section class="featured-images">
+    <h2 class="section-title" style="text-align:center;margin-bottom:10px;">Featured Items</h2>
+    <div class="carousel" id="carousel">
+      <img src="images/product-item5.jpg" class="carousel-img" alt="Stylish Sweater">
+      <img src="images/product-item6.jpg" class="carousel-img" alt="Trendy Jacket" style="display:none;">
+    </div>
+  </section>
+
+  <!-- Welcome Section -->
+  <section class="welcome-section" style="max-width:900px;margin:30px auto 0 auto;text-align:center;">
+    <h1 style="font-size:2.2rem;color:#7a6c5d;font-weight:700;margin-bottom:10px;">Welcome to ReWear!</h1>
+    <p style="font-size:1.1rem;color:#6d6256;margin-bottom:0;">Exchange your unused clothing, earn points, and join the sustainable fashion movement.</p>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-section">
+    <h2 class="section-title">Browse By Category</h2>
+    <div class="categories-grid">
+      <div class="category-card">Men</div>
+      <div class="category-card">Women</div>
+      <div class="category-card">Kids</div>
+      <div class="category-card">Accessories</div>
+      <div class="category-card">Shoes</div>
+      <div class="category-card">Bags</div>
+    </div>
+  </section>
+
+  <!-- Product Listings -->
+  <section class="product-listings">
+    <h2 class="section-title">Available Clothing Items</h2>
+    <div id="searchResultMsg" style="font-size:1.1rem;color:#7a6c5d;margin-bottom:16px;"></div>
+    <div class="products-grid" id="productsGrid">
+      <div class="product-card">
+        <img src="images/product-item1.jpg" alt="Blue Denim Jacket">
+        <div class="product-title">Blue Denim Jacket</div>
+      </div>
+      <div class="product-card">
+        <img src="images/product-item2.jpg" alt="Red Dress">
+        <div class="product-title">Red Dress</div>
+      </div>
+      <div class="product-card">
+        <img src="images/product-item3.jpg" alt="Green Hoodie">
+        <div class="product-title">Green Hoodie</div>
+      </div>
+      <div class="product-card">
+        <img src="images/product-item4.jpg" alt="Classic Shirt">
+        <div class="product-title">Classic Shirt</div>
+      </div>
+      <div class="product-card">
+        <img src="images/product-item7.jpg" alt="Kids T-shirt">
+        <div class="product-title">Kids T-shirt</div>
+      </div>
+      <div class="product-card">
+        <img src="images/product-item8.jpg" alt="Leather Bag">
+        <div class="product-title">Leather Bag</div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/browse.js"></script>
+</body>
+</html> 
