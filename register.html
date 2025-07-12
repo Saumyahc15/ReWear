@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ReWear - Register</title>
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Create Account</h2>
+    <form id="registerForm">
+      <div class="form-group">
+        <label for="reg-name">Name</label>
+        <input type="text" id="reg-name" name="name" placeholder="Full Name" required />
+      </div>
+      <div class="form-group">
+        <label for="reg-email">Email</label>
+        <input type="email" id="reg-email" name="email" placeholder="Email Address" required />
+      </div>
+      <div class="form-group password-group">
+        <label for="reg-password">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="reg-password" name="password" placeholder="Enter Password" required />
+          <button type="button" class="toggle-password" onclick="togglePassword('reg-password', 'reg-eye-password')">
+            <i class="fas fa-eye" id="reg-eye-password"></i>
+          </button>
+        </div>
+        <div id="reg-passwordErrors" class="error-text"></div>
+      </div>
+      <div class="form-group password-group">
+        <label for="reg-confirmPassword">Confirm Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="reg-confirmPassword" name="confirmPassword" placeholder="Confirm Password" required />
+          <button type="button" class="toggle-password" onclick="togglePassword('reg-confirmPassword', 'reg-eye-confirmPassword')">
+            <i class="fas fa-eye" id="reg-eye-confirmPassword"></i>
+          </button>
+        </div>
+        <div id="reg-confirmPasswordError" class="error-text"></div>
+      </div>
+      <button type="submit" class="auth-btn">Register</button>
+      <p class="auth-link">Already have an account? <a href="login.html">Sign In</a></p>
+    </form>
+  </div>
+  <script src="register.js"></script>
+</body>
+</html> 

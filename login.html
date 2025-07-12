@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ReWear - Login</title>
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Sign In</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" name="email" placeholder="Email Address" required />
+      </div>
+      <div class="form-group password-group">
+        <label for="login-password">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="login-password" name="password" placeholder="Enter Password" required />
+          <button type="button" class="toggle-password" onclick="togglePassword('login-password', 'login-eye-password')">
+            <i class="fas fa-eye" id="login-eye-password"></i>
+          </button>
+        </div>
+      </div>
+      <button type="submit" class="auth-btn">Login</button>
+      <p class="auth-link">Don't have an account? <a href="register.html">Register</a></p>
+    </form>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html> 
